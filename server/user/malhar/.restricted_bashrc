@@ -1,0 +1,26 @@
+
+    function cd() {
+        local target_dir
+        if [[ -z "$1" || "$1" == "." ]]; then
+            target_dir=$(pwd)
+        elif [[ "$1" == ".." ]]; then
+            target_dir=$(realpath "$(pwd)/..")
+        else
+            target_dir=$(realpath "$(pwd)/$1")
+        fi
+    
+        if [[ $target_dir == /Users/malhar/Study/SEM7/Cloud/Project/ground_isolated_user_folders/server/user/malhar* ]]; then
+            builtin cd "$target_dir"
+        else
+            echo "Access denied: Cannot navigate outside the user directory"
+        fi
+    }
+    
+    # Override pwd to restrict it
+    function pwd() {
+        echo "Access to pwd is restricted."
+    }
+    
+    PS1="restricted-shell$ "; export PS1
+    cd "/Users/malhar/Study/SEM7/Cloud/Project/ground_isolated_user_folders/server/user/malhar"
+    

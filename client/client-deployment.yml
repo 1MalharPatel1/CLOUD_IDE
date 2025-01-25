@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-client
+  namespace: web-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-app-client
+  template:
+    metadata:
+      labels:
+        app: web-app-client
+    spec:
+      containers:
+      - name: web-app-client
+        image: web-app-client:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-server
+  namespace: web-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-app-server
+  template:
+    metadata:
+      labels:
+        app: web-app-server
+    spec:
+      containers:
+      - name: web-app-server
+        image: web-app-server:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9000
+
